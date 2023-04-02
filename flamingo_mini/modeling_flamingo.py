@@ -318,7 +318,7 @@ class FlamingoGPT2(FlamingoBaseModel):
         base_lm: GPT2LMHeadModel = GPT2LMHeadModel.from_pretrained(config.lm)  # type: ignore
         
         assert self.config.dim == base_lm.config.n_embd, \
-            f"specified {self.config.dim=} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.n_embd}"
+            f"specified {self.config.dim} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.n_embd}"
 
         base_lm.resize_token_embeddings(base_lm.config.vocab_size + 1)
         self.lm: GPT2Model = base_lm.transformer
@@ -343,7 +343,7 @@ class FlamingoOPT(FlamingoBaseModel):
         base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained(config.lm)  # type: ignore
 
         assert self.config.dim == base_lm.config.hidden_size, \
-            f"specified {self.config.dim=} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.hidden_size}"
+            f"specified {self.config.dim} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.hidden_size}"
 
         base_lm.resize_token_embeddings(base_lm.config.vocab_size + 1)
         self.lm: OPTModel = base_lm.model
