@@ -60,7 +60,7 @@ class FlamingoBaseModel(ABC, PreTrainedModel):
         super().__init__(config)
         
         with suppress_model_loading_warnings(suppress_warnings):
-            self.vision_encoder = CLIPVisionModel.from_pretrained(config.clip_model_type) # type: ignore
+            self.vision_encoder = CLIPVisionModel.from_pretrained(config.clip_model_type, local_files_only=True) # type: ignore
 
         self.resampler = PerceiverResampler(
             dim=config.dim_visual,
@@ -315,7 +315,7 @@ class FlamingoGPT2(FlamingoBaseModel):
         assert config.lm.startswith('gpt')
         super().__init__(config)
 
-        base_lm: GPT2LMHeadModel = GPT2LMHeadModel.from_pretrained(config.lm)  # type: ignore
+        base_lm: GPT2LMHeadModel = GPT2LMHeadModel.from_pretrained(config.lm, local_files_only=True)  # type: ignore
         
         assert self.config.dim == base_lm.config.n_embd, \
             f"specified {self.config.dim} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.n_embd}"
@@ -340,7 +340,7 @@ class FlamingoOPT(FlamingoBaseModel):
         assert config.lm.startswith('facebook/opt')
         super().__init__(config)
 
-        base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained(config.lm)  # type: ignore
+        base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained(config.lm, local_files_only=True)  # type: ignore
 
         assert self.config.dim == base_lm.config.hidden_size, \
             f"specified {self.config.dim} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.hidden_size}"
