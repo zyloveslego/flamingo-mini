@@ -390,7 +390,8 @@ class FlamingoModel(PreTrainedModel):
         super().__init__(config)
 
         if model_class is None:
-            model_class = self._find_flamingo_class(config.lm)
+#             model_class = self._find_flamingo_class(config.lm)
+            model_class = FlamingoGPT2
         self.flamingo: FlamingoBaseModel = model_class(config)
         
         if config.freeze_language_model:
@@ -405,7 +406,6 @@ class FlamingoModel(PreTrainedModel):
 
     @classmethod
     def _find_flamingo_class(cls, language_model_id: str):
-        print(language_model_id)
         for prefix, flamingo_class in cls._LANGUAGE_MODEL_VERSIONS.items():
             if language_model_id.startswith(prefix):
                 return flamingo_class
