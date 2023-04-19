@@ -344,7 +344,7 @@ class FlamingoOPT(FlamingoBaseModel):
         super().__init__(config)
 
 #         base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained(config.lm)  # type: ignore
-        base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained("/kaggle/input/my-opt350m/opt350m/")  # type: ignore
+        base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained("/kaggle/input/my-opt/")  # type: ignore
 
         assert self.config.dim == base_lm.config.hidden_size, \
             f"specified {self.config.dim} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.hidden_size}"
@@ -374,7 +374,7 @@ class FlamingoModel(PreTrainedModel):
     # value = Flamingo class for the respective language model
     _LANGUAGE_MODEL_VERSIONS = {
         'gpt2': FlamingoGPT2,
-#         'facebook/opt': FlamingoOPT,
+        'facebook/opt': FlamingoOPT,
     }
     
     _keys_to_ignore_on_load_missing = [r"flamingo.vision_encoder"]
@@ -392,8 +392,8 @@ class FlamingoModel(PreTrainedModel):
         super().__init__(config)
 
         if model_class is None:
-#             model_class = self._find_flamingo_class(config.lm)
-            model_class = FlamingoGPT2
+            model_class = self._find_flamingo_class(config.lm)
+#             model_class = FlamingoGPT2
         self.flamingo: FlamingoBaseModel = model_class(config)
         
         if config.freeze_language_model:
@@ -409,7 +409,6 @@ class FlamingoModel(PreTrainedModel):
     @classmethod
     def _find_flamingo_class(cls, language_model_id: str):
         for prefix, flamingo_class in cls._LANGUAGE_MODEL_VERSIONS.items():
-            print(f'prefix is {prefix}')
             if language_model_id.startswith(prefix):
                 return flamingo_class
         raise ValueError(f'unsupported language model {language_model_id}')
