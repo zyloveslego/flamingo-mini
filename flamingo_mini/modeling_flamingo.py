@@ -313,6 +313,7 @@ class FlamingoGPT2(FlamingoBaseModel):
 
     def __init__(self, config: FlamingoConfig):
         from transformers import GPT2LMHeadModel, GPT2Model
+        print(config.lm)
         assert config.lm.startswith('gpt')
         super().__init__(config)
 
