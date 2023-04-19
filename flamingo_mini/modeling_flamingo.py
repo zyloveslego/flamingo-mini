@@ -405,6 +405,7 @@ class FlamingoModel(PreTrainedModel):
 
     @classmethod
     def _find_flamingo_class(cls, language_model_id: str):
+        print(language_model_id)
         for prefix, flamingo_class in cls._LANGUAGE_MODEL_VERSIONS.items():
             if language_model_id.startswith(prefix):
                 return flamingo_class
