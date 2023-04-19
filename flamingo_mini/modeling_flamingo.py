@@ -343,7 +343,7 @@ class FlamingoOPT(FlamingoBaseModel):
         super().__init__(config)
 
 #         base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained(config.lm)  # type: ignore
-        base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained("/kaggle/input/my-opt/")  # type: ignore
+        base_lm: OPTForCausalLM = OPTForCausalLM.from_pretrained("/kaggle/input/my-opt350m/")  # type: ignore
 
         assert self.config.dim == base_lm.config.hidden_size, \
             f"specified {self.config.dim} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.hidden_size}"
