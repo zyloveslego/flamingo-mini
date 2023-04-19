@@ -36,17 +36,19 @@ class FlamingoProcessor:
         if config.lm.startswith('gpt2'):
             if use_fast:
                 from transformers import GPT2TokenizerFast
-
-                self.tokenizer = GPT2TokenizerFast.from_pretrained('gpt2')
+                
+#                 self.tokenizer = GPT2TokenizerFast.from_pretrained('gpt2')
+                self.tokenizer = GPT2TokenizerFast.from_pretrained('/kaggle/input/my-gpt2/')
             else:
                 from transformers import GPT2Tokenizer
-
-                self.tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+                
+#                 self.tokenizer = GPT2TokenizerFast.from_pretrained('gpt2')
+                self.tokenizer = GPT2Tokenizer.from_pretrained('/kaggle/input/my-gpt2/')
         elif config.lm.startswith('facebook/opt'):
             from transformers import AutoTokenizer
             
 #             self.tokenizer = AutoTokenizer.from_pretrained('facebook/opt-30b', use_fast=use_fast)
-            self.tokenizer = AutoTokenizer.from_pretrained("/kaggle/input/my-opt/", use_fast=use_fast)
+            self.tokenizer = AutoTokenizer.from_pretrained("/kaggle/input/my-opt350m/", use_fast=use_fast)
         
         self.tokenizer.add_bos_token = True
         self.tokenizer.pad_token = self.tokenizer.eos_token
