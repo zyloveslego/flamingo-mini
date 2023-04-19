@@ -30,7 +30,8 @@ class FlamingoProcessor:
         """
         self.config = config
         self.eoc_token = eoc_token
-        self.vision_processor = CLIPImageProcessor.from_pretrained(config.clip_model_type) #type: ignore
+#         self.vision_processor = CLIPImageProcessor.from_pretrained(config.clip_model_type) #type: ignore
+        self.vision_processor = CLIPImageProcessor.from_pretrained("/kaggle/input/clip-vit-base-patch32/") #type: ignore
         
         if config.lm.startswith('gpt2'):
             if use_fast:
