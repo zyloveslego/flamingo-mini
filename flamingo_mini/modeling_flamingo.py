@@ -372,7 +372,7 @@ class FlamingoModel(PreTrainedModel):
     # value = Flamingo class for the respective language model
     _LANGUAGE_MODEL_VERSIONS = {
         'gpt2': FlamingoGPT2,
-        'facebook/opt': FlamingoOPT
+#         'facebook/opt': FlamingoOPT
     }
     
     _keys_to_ignore_on_load_missing = [r"flamingo.vision_encoder"]
