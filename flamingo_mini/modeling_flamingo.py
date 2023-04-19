@@ -391,8 +391,8 @@ class FlamingoModel(PreTrainedModel):
         super().__init__(config)
 
         if model_class is None:
-            model_class = self._find_flamingo_class(config.lm)
-#             model_class = FlamingoGPT2
+#             model_class = self._find_flamingo_class(config.lm)
+            model_class = FlamingoGPT2
         self.flamingo: FlamingoBaseModel = model_class(config)
         
         if config.freeze_language_model:
