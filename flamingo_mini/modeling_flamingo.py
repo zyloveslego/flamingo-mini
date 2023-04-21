@@ -61,7 +61,7 @@ class FlamingoBaseModel(ABC, PreTrainedModel):
         
         with suppress_model_loading_warnings(suppress_warnings):
 #             self.vision_encoder = CLIPVisionModel.from_pretrained(config.clip_model_type) # type: ignore
-            self.vision_encoder = CLIPVisionModel.from_pretrained("/kaggle/input/clip-vit-base-patch32/") # type: ignore
+            self.vision_encoder = CLIPVisionModel.from_pretrained("/kaggle/input/clip-vit-large-patch14/") # type: ignore
 
         self.resampler = PerceiverResampler(
             dim=config.dim_visual,
