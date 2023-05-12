@@ -318,7 +318,7 @@ class FlamingoGPT2(FlamingoBaseModel):
         super().__init__(config)
 
 #         base_lm: GPT2LMHeadModel = GPT2LMHeadModel.from_pretrained(config.lm)  # type: ignore
-        base_lm: GPT2LMHeadModel = GPT2LMHeadModel.from_pretrained("/kaggle/input/my-gpt2/")  # type: ignore
+        base_lm: GPT2LMHeadModel = GPT2LMHeadModel.from_pretrained("/kaggle/input/opt-1.3b/")  # type: ignore
         
         assert self.config.dim == base_lm.config.n_embd, \
             f"specified {self.config.dim} in FlamingoConfig, but {config.lm} has hidden size={base_lm.config.n_embd}"
